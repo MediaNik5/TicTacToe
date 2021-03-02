@@ -19,6 +19,10 @@ public final class Constants {
     public static final double WIDTH_OF_STROKE = 5;
     public static final Color COLOR_OF_NOUGHT = Color.BLACK;
 
+    public static final int LEFT_STICK_ROTATION_ANIMATION = 270;
+    public static final int RIGHT_STICK_ROTATION_ANIMATION = 450;
+
     public static final String JAVA_VERSION = System.getProperty("java.version");
     public static final String JAVAFX_VERSION = System.getProperty("javafx.version");
+
 }

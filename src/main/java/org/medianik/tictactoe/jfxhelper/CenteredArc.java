@@ -1,4 +1,4 @@
-package org.medianik.tictactoe.gameobject;
+package org.medianik.tictactoe.jfxhelper;
 
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
@@ -9,7 +9,7 @@ import lombok.AllArgsConstructor;
 
 import static org.medianik.tictactoe.Constants.*;
 
-class CenteredArc {
+public class CenteredArc {
 
     @AllArgsConstructor
     public enum ArcType{

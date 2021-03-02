@@ -2,12 +2,11 @@ package org.medianik.tictactoe.gameobject;
 
 import javafx.scene.Group;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Arc;
 import javafx.scene.shape.ArcType;
+import org.medianik.tictactoe.jfxhelper.CenteredArc;
 
 import static java.lang.Math.PI;
-import static org.medianik.tictactoe.Constants.SIZE_OF_MARK;
 import static org.medianik.tictactoe.Constants.TIME_PER_TICK_IN_ANIMATION;
 
 public class Nought extends Mark {
@@ -18,7 +17,6 @@ public class Nought extends Mark {
     public Nought(int x, int y, int startingTick) {
         super(x, y, startingTick);
         animationProgress = 0;
-        calculateNormalizingCoefficient();
     }
 
     /**
@@ -33,7 +31,7 @@ public class Nought extends Mark {
     public void animate(int tick) {
         if (animationProgress < 1.) {
             animationProgress += animationSpeed((tick - startingTick) * TIME_PER_TICK_IN_ANIMATION);
-            if (arc == null) {
+            if (group == null) {
                 group = CenteredArc.centeredArc(x, y, CenteredArc.ArcType.Mark);
                 arc = (Arc) group.getChildren().get(1);
             }else
@@ -45,8 +43,8 @@ public class Nought extends Mark {
 
     @Override
     public void display(Pane pane) {
-        if (isAlive() && !pane.getChildren().contains(arc))
-            pane.getChildren().add(arc);
+        if (isAlive() && !pane.getChildren().contains(group))
+            pane.getChildren().add(group);
         else if(!isAlive())
             pane.getChildren().remove(group);
     }

@@ -12,6 +12,7 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.medianik.tictactoe.gameobject.Cross;
 import org.medianik.tictactoe.gameobject.GameObject;
 import org.medianik.tictactoe.gameobject.Nought;
 
@@ -83,6 +84,7 @@ public class TicTacToe extends Application {
         setupIcon(stage);
 
         gameObjects.add(new Nought(0, 0, tick));
+        gameObjects.add(new Cross(0, 0, tick));
         pane.getChildren().add(new Circle(0, 0, 1));
         executor.setCycleCount(Animation.INDEFINITE);
         executor.play();

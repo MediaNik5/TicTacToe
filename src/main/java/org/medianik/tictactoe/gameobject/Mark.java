@@ -18,6 +18,7 @@ public abstract class Mark implements AnimatedGameObject {
         this.x = x;
         this.y = y;
         this.startingTick = startingTick;
+        calculateNormalizingCoefficient();
     }
 
     protected void calculateNormalizingCoefficient() {
