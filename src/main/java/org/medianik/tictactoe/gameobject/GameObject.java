@@ -3,10 +3,10 @@ package org.medianik.tictactoe.gameobject;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
-public interface GameObject {
+public interface GameObject{
 
-    default void tick(StackPane pane, int tick) {
-        if (isAlive())
+    default void tick(StackPane pane, int tick){
+        if(isAlive())
             display(pane);
     }
 
