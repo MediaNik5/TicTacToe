@@ -34,12 +34,8 @@ public class Nought extends Mark {
         if (animationProgress < 1.) {
             animationProgress += animationSpeed((tick - startingTick) * TIME_PER_TICK_IN_ANIMATION);
             if (arc == null) {
-//                group = CenteredArc.centeredArc(x, y, CenteredArc.ArcType.Mark);
-//                arc = (Arc) group.getChildren().get(1);
-                arc = new Arc(x, y, SIZE_OF_MARK, SIZE_OF_MARK, 0, 360*animationProgress);
-                arc.setFill(Color.TRANSPARENT);
-                arc.setStroke(Color.BLACK);
-                arc.setType(ArcType.ROUND);
+                group = CenteredArc.centeredArc(x, y, CenteredArc.ArcType.Mark);
+                arc = (Arc) group.getChildren().get(1);
             }else
                 arc.setLength(360*animationProgress);
         } else
