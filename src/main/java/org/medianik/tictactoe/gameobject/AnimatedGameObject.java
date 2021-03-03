@@ -1,6 +1,6 @@
 package org.medianik.tictactoe.gameobject;
 
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.Pane;
 
 public interface AnimatedGameObject extends GameObject{
 
@@ -13,7 +13,7 @@ public interface AnimatedGameObject extends GameObject{
     void animate(int tick);
 
     @Override
-    default void tick(StackPane pane, int tick){
+    default void tick(Pane pane, int tick){
         if(isAlive()){
             animate(tick);
             display(pane);

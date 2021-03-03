@@ -35,12 +35,16 @@ public class CenteredArc{
         // Create a background fill on which the arc will be centered.
         // The paint of the background fill can be set to Color.TRANSPARENT
         // if you don't want the fill to be seen.
-        Rectangle fill = new Rectangle(x, y, type.sizeOfCell, type.sizeOfCell);
+        Rectangle fill = new Rectangle(type.sizeOfCell, type.sizeOfCell);
         fill.setFill(Color.TRANSPARENT);
+
+        Group group = new Group(fill, arc);
+        group.setTranslateX(x);
+        group.setTranslateY(y);
 
         // Place the fill and the arc in the group.
         // The Group will be a fixed sized matching the fill size.
-        return new Group(fill, arc);
+        return group;
     }
 
     @AllArgsConstructor

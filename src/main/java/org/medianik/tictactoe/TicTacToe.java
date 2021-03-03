@@ -18,6 +18,7 @@ import static org.medianik.tictactoe.Constants.*;
 public class TicTacToe extends Application{
 
     private static TicTacToe instance;
+
     private final int width;
     private final int height;
     final StackPane pane;
@@ -31,7 +32,7 @@ public class TicTacToe extends Application{
         instance = this;
     }
 
-    static TicTacToe getInstance(){
+    public static TicTacToe getInstance(){
         return instance;
     }
 
@@ -39,14 +40,17 @@ public class TicTacToe extends Application{
         launch();
     }
 
+
+    /**
+     * The entry point
+     */
     @Override
     public void start(Stage stage){
-        var scene = new Scene(pane, width, height);
+        var scene = new Scene(pane, width, height, BACKGROUND_COLOR);
         stage.setScene(scene);
         stage.show();
         setupIcon(stage);
 
-        pane.getChildren().add(new Circle(0, 0, 1));
         manager.start();
     }
 
@@ -65,5 +69,13 @@ public class TicTacToe extends Application{
         InputStream inputIcon = getClass().getResourceAsStream("/icon.png");
         Image icon = new Image(inputIcon);
         stage.getIcons().add(icon);
+    }
+
+    public int getWidth(){
+        return width;
+    }
+
+    public int getHeight(){
+        return height;
     }
 }

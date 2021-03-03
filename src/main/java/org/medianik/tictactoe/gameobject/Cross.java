@@ -40,6 +40,17 @@ public class Cross extends Mark{
         }
     }
 
+    private void createCross(){
+        leftStick = new Rectangle(0, SIZE_OF_MARK);
+        leftStick.setTranslateX(getX());
+        leftStick.setTranslateY(getY());
+        leftStick.setFill(COLOR_OF_CROSS);
+        rightStick = new Rectangle(0, SIZE_OF_MARK);
+        rightStick.setTranslateX(getX());
+        rightStick.setTranslateY(getY());
+        rightStick.setFill(COLOR_OF_CROSS);
+    }
+
     @Override
     public void display(Pane pane){
         if(isAlive() && !pane.getChildren().contains(leftStick))
