@@ -53,7 +53,6 @@ public class TicTacToe extends Application{
         manager.start();
     }
 
-
     private int calculateInitialWidth(){
         var bounds = Screen.getPrimary().getBounds();
         return Math.min((int) bounds.getWidth() - GLOBAL_OFFSET, MAX_WIDTH);

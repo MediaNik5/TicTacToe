@@ -28,10 +28,9 @@ public class Cross extends Mark{
     public void animate(int tick){
         if(animationProgress < 1.){
             animationProgress += animationSpeed((tick - startingTick)*TIME_PER_TICK_IN_ANIMATION);
-            if(leftStick == null || rightStick == null){
-                leftStick = new Rectangle(x, y, 0, SIZE_OF_MARK);
-                rightStick = new Rectangle(x, y, 0, SIZE_OF_MARK);
-            }
+            if(leftStick == null || rightStick == null)
+                createCross();
+
             leftStick.setRotate(LEFT_STICK_ROTATION_ANIMATION*animationProgress + 45);
             leftStick.setWidth(WIDTH_OF_STROKE*animationProgress);
 
