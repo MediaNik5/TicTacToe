@@ -27,7 +27,7 @@ public class GameManager{
     private int tick;
 
     public GameManager(){
-        executor = new Timeline(new KeyFrame(Duration.millis(TIME_PER_TICK * 1000), GameManager::execute));
+        executor = new Timeline(new KeyFrame(Duration.millis(TIME_PER_TICK*1000), GameManager::execute));
         gameObjects = new HashSet<>();
         players = new Player[]{new Player(Mark.Type.CROSS), new Player(Mark.Type.NOUGHT)};
         instance = this;
@@ -50,14 +50,14 @@ public class GameManager{
         return instance;
     }
 
-    public static void execute(ActionEvent actionEvent) {
+    public static void execute(ActionEvent actionEvent){
         var instance = getInstance();
 //        var application = TicTacToe.getInstance();
         instance.tick++;
         try {
-            for (GameObject go : instance.gameObjects)
+            for(GameObject go : instance.gameObjects)
                 go.tick(instance.pane, instance.tick);
-        } catch (Throwable e) {
+        }catch(Throwable e){
             e.printStackTrace();
         }
     }
@@ -71,8 +71,8 @@ public class GameManager{
         var currentPlayer = getCurrentPlayer(instance);
 
         Mark placedMark = instance.grid.click(
-                (int)event.getX(),
-                (int)event.getY(),
+                (int) event.getX(),
+                (int) event.getY(),
                 instance.getTick(),
                 currentPlayer
         );

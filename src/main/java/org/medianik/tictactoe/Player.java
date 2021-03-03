@@ -31,6 +31,6 @@ public class Player{
     }
 
     public interface Creator<T extends Mark>{
-        public T create(int x, int y, int startingTick);
+        T create(int x, int y, int startingTick);
     }
 }

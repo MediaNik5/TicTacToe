@@ -25,7 +25,6 @@ public final class Constants{
     public static final Color BACKGROUND_COLOR = Color.BLACK;
 
 
-
     public static final int LEFT_STICK_ROTATION_ANIMATION = 270;
     public static final int RIGHT_STICK_ROTATION_ANIMATION = 450;
 }

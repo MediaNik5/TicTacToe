@@ -1,7 +1,6 @@
 package org.medianik.tictactoe.gameobject;
 
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 
 public interface GameObject{
 
@@ -9,7 +8,6 @@ public interface GameObject{
         if(isAlive())
             display(pane);
     }
-
 
 
     void display(Pane pane);

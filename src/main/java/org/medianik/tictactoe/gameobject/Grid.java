@@ -54,6 +54,7 @@ public class Grid implements GameObject{
 
     /**
      * Checks whether this click is supposed to place mark and places if needed.
+     *
      * @return Placed mark or null if no changes have been made.
      */
     public Mark click(int x, int y, int tick, Player player){
@@ -65,8 +66,8 @@ public class Grid implements GameObject{
         if(Math.min(x, y) < 0)
             return null;
 
-        int column = (x-1)/(int) SIZE_OF_CELL;
-        int row = (y-1)/(int) SIZE_OF_CELL;
+        int column = (x - 1)/(int) SIZE_OF_CELL;
+        int row = (y - 1)/(int) SIZE_OF_CELL;
 
         if(marks[column][row] == null){
             int newX = getCoordinate(column);
@@ -127,8 +128,7 @@ public class Grid implements GameObject{
                 return true;
 
         if(typeOf(marks[x][y]) == typeOf(marks[x][(y + 1)%3]))
-            if(typeOf(marks[x][y]) == typeOf(marks[x][(y + 2)%3]))
-                return true;
+            return typeOf(marks[x][y]) == typeOf(marks[x][(y + 2)%3]);
 
         return false;
     }
@@ -142,8 +142,7 @@ public class Grid implements GameObject{
                 return true;
 
         if(typeOf(marks[1][1]) == typeOf(marks[0][2]))
-            if(typeOf(marks[1][1]) == typeOf(marks[2][0]))
-                return true;
+            return typeOf(marks[1][1]) == typeOf(marks[2][0]);
 
         return false;
     }
