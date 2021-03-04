@@ -3,24 +3,34 @@ package org.medianik.tictactoe;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 import org.medianik.tictactoe.gameobject.GameObject;
 import org.medianik.tictactoe.gameobject.Grid;
 import org.medianik.tictactoe.gameobject.Mark;
+import org.medianik.tictactoe.gameobject.TextLabel;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import static org.medianik.tictactoe.Constants.TIME_PER_TICK;
+import static org.medianik.tictactoe.Constants.WIN_TEXT;
 
 public class GameManager{
 
+    private final static GameManager instance = new GameManager();
+    public static GameManager getInstance(){
+        return instance;
+    }
+
     private final Set<GameObject> gameObjects;
     private final Timeline executor;
-    private static GameManager instance;
     private Grid grid;
     private Pane pane;
     private final Player[] players;
@@ -30,7 +40,6 @@ public class GameManager{
         executor = new Timeline(new KeyFrame(Duration.millis(TIME_PER_TICK*1000), GameManager::execute));
         gameObjects = new HashSet<>();
         players = new Player[]{new Player(Mark.Type.CROSS), new Player(Mark.Type.NOUGHT)};
-        instance = this;
     }
 
     public void start(){
@@ -39,21 +48,18 @@ public class GameManager{
         pane = TicTacToe.getInstance().pane;
         pane.setOnMouseClicked(GameManager::click);
 
-        grid = new Grid(pane);
+        grid = new Grid();
         gameObjects.add(grid);
 
         executor.setCycleCount(Animation.INDEFINITE);
         executor.play();
     }
 
-    public static GameManager getInstance(){
-        return instance;
-    }
 
-    public static void execute(ActionEvent actionEvent){
+    private static void execute(ActionEvent actionEvent){
         var instance = getInstance();
 //        var application = TicTacToe.getInstance();
-        instance.tick++;
+        instance.increaseTick();
         try {
             for(GameObject go : instance.gameObjects)
                 go.tick(instance.pane, instance.tick);
@@ -62,12 +68,15 @@ public class GameManager{
         }
     }
 
+    private void increaseTick(){
+        instance.tick++;
+    }
+
     /**
      * Handles the Mouse clicking event. Supposed to be called by authorized javafx handler.
      */
     private static void click(MouseEvent event){
         var instance = getInstance();
-
         var currentPlayer = getCurrentPlayer(instance);
 
         Mark placedMark = instance.grid.click(
@@ -77,13 +86,20 @@ public class GameManager{
                 currentPlayer
         );
 
-        if(placedMark != null){
+        if(isPresent(placedMark)){
+            instance.gameObjects.add(placedMark);
+
+            if(instance.grid.checkWin(placedMark))
+                win();
+
             instance.getPlayers()[0].changeTurn();
             instance.getPlayers()[1].changeTurn();
-            instance.gameObjects.add(placedMark);
-            if(instance.grid.checkWin(placedMark))
-                System.out.println("WON");
         }
+    }
+
+
+    private static boolean isPresent(Mark placedMark){
+        return placedMark != null;
     }
 
     private static Player getCurrentPlayer(GameManager instance){
@@ -96,5 +112,9 @@ public class GameManager{
 
     public int getTick(){
         return tick;
+    }
+
+    private static void win(){
+        getInstance().gameObjects.add(new TextLabel(WIN_TEXT, getInstance().getTick(), 0, 0));
     }
 }

@@ -16,17 +16,10 @@ public class Cross extends Mark{
         animationProgress = 0;
     }
 
-    /**
-     * @param time is value from 0 to 1 stating that time*100% of animation is done
-     */
-    @Override
-    public double animationSpeed(double time){
-        return Math.pow(Math.sin(PI*time), 3)*normalizingCoefficient;
-    }
 
     @Override
     public void animate(int tick){
-        if(animationProgress < 1.){
+        if(animationProgress <= 1.){
             animationProgress += animationSpeed((tick - startingTick)*TIME_PER_TICK_IN_ANIMATION);
             if(leftStick == null || rightStick == null)
                 createCross();
@@ -44,6 +37,7 @@ public class Cross extends Mark{
         leftStick.setTranslateX(getX());
         leftStick.setTranslateY(getY());
         leftStick.setFill(COLOR_OF_CROSS);
+
         rightStick = new Rectangle(0, SIZE_OF_MARK);
         rightStick.setTranslateX(getX());
         rightStick.setTranslateY(getY());
@@ -54,5 +48,11 @@ public class Cross extends Mark{
     public void display(Pane pane){
         if(isAlive() && !pane.getChildren().contains(leftStick))
             pane.getChildren().addAll(leftStick, rightStick);
+    }
+
+    @Override
+    public void destroy(int tick, Pane pane){
+        super.destroy(tick, pane);
+        pane.getChildren().removeAll(leftStick, rightStick);
     }
 }

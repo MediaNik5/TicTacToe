@@ -19,17 +19,9 @@ public class Nought extends Mark{
         animationProgress = 0;
     }
 
-    /**
-     * @param time is value from 0 to 1 stating that time*100% of animation is done
-     */
-    @Override
-    public double animationSpeed(double time){
-        return Math.pow(Math.sin(PI*time), 7)*normalizingCoefficient; //sin(pi*x)^7
-    }
-
     @Override
     public void animate(int tick){
-        if(animationProgress < 1.){
+        if(animationProgress <= 1.){
             animationProgress += animationSpeed((tick - startingTick)*TIME_PER_TICK_IN_ANIMATION);
             if(group == null){
                 group = CenteredArc.centeredArc(getX(), getY(), CenteredArc.ArcType.Mark);

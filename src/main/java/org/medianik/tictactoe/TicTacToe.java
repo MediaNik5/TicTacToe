@@ -17,6 +17,9 @@ import static org.medianik.tictactoe.Constants.*;
 public class TicTacToe extends Application{
 
     private static TicTacToe instance;
+    public static TicTacToe getInstance(){
+        return instance;
+    }
 
     private final int width;
     private final int height;
@@ -24,21 +27,17 @@ public class TicTacToe extends Application{
     private final GameManager manager;
 
     public TicTacToe(){
-        width = calculateInitialWidth();
-        height = calculateInitialHeight();
+        width = calculateWidth();
+        height = calculateHeight();
         pane = new StackPane();
-        manager = new GameManager();
+        manager = GameManager.getInstance();
         instance = this;
     }
 
-    public static TicTacToe getInstance(){
-        return instance;
-    }
 
     public static void main(String[] args){
         launch();
     }
-
 
     /**
      * The entry point
@@ -53,12 +52,12 @@ public class TicTacToe extends Application{
         manager.start();
     }
 
-    private int calculateInitialWidth(){
+    private int calculateWidth(){
         var bounds = Screen.getPrimary().getBounds();
         return Math.min((int) bounds.getWidth() - GLOBAL_OFFSET, MAX_WIDTH);
     }
 
-    private int calculateInitialHeight(){
+    private int calculateHeight(){
         var bounds = Screen.getPrimary().getBounds();
         return Math.min((int) bounds.getHeight() - GLOBAL_OFFSET, MAX_HEIGHT);
     }

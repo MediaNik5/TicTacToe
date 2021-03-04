@@ -22,7 +22,13 @@ public final class Constants{
     public static final Color COLOR_OF_NOUGHT = Color.WHITE;
     public static final Color COLOR_OF_CROSS = Color.WHITE;
     public static final Color COLOR_OF_GRID = Color.WHITE;
+    public static final Color COLOR_OF_MESSAGES = Color.AZURE;
     public static final Color BACKGROUND_COLOR = Color.BLACK;
+    public static final Color STROKE_OF_MESSAGES = Color.gray(0.2);
+    public static final String FONT_OF_MESSAGES = "Centaur";
+    public static final int SIZE_OF_MESSAGES = 130;
+
+    public static final String WIN_TEXT = "You won!";
 
 
     public static final int LEFT_STICK_ROTATION_ANIMATION = 270;

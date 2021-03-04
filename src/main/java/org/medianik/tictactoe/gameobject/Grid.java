@@ -13,9 +13,8 @@ public class Grid implements GameObject{
     Mark[][] marks = new Mark[3][3];
     private boolean alive = true;
 
-    public Grid(Pane pane){
+    public Grid(){
         lines = initializeGrid();
-        pane.getChildren().addAll(lines);
     }
 
     private Rectangle[] initializeGrid(){
@@ -37,7 +36,8 @@ public class Grid implements GameObject{
 
     @Override
     public void display(Pane pane){
-        //pass
+        if(!pane.getChildren().contains(lines[0]))
+            pane.getChildren().addAll(lines);
     }
 
     @Override
