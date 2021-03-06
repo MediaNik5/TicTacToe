@@ -2,18 +2,18 @@ package org.medianik.tictactoe.gameobject;
 
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
-import org.medianik.tictactoe.Player;
+import org.medianik.tictactoe.player.Player;
 import org.medianik.tictactoe.TicTacToe;
 
-import static org.medianik.tictactoe.Constants.*;
+import static org.medianik.tictactoe.util.Constants.*;
 
-public class Grid implements GameObject{
+public class Grid extends GameObject{
 
-    private final Rectangle[] lines;
+    private Rectangle[] lines;
     Mark[][] marks = new Mark[3][3];
-    private boolean alive = true;
 
     public Grid(){
+        super(0, 0);
         lines = initializeGrid();
     }
 
@@ -41,15 +41,10 @@ public class Grid implements GameObject{
     }
 
     @Override
-    public boolean isAlive(){
-        return alive;
-    }
-
-    @Override
     public void destroy(int tick, Pane pane){
-        GameObject.super.destroy(tick, pane);
+        super.destroy(tick, pane);
         pane.getChildren().removeAll(lines);
-        alive = false;
+        lines = null;
     }
 
     /**

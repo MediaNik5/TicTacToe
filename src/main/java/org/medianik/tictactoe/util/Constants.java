@@ -1,4 +1,4 @@
-package org.medianik.tictactoe;
+package org.medianik.tictactoe.util;
 
 import javafx.scene.paint.Color;
 
@@ -24,8 +24,12 @@ public final class Constants{
     public static final Color COLOR_OF_GRID = Color.WHITE;
     public static final Color COLOR_OF_MESSAGES = Color.AZURE;
     public static final Color BACKGROUND_COLOR = Color.BLACK;
-    public static final Color STROKE_OF_MESSAGES = Color.gray(0.2);
+    public static final Color STROKE_OF_MESSAGES = Color.gray(0.15);
     public static final String FONT_OF_MESSAGES = "Centaur";
+    public static final int DISTANCE_BETWEEN_INPUTS_X = 0;
+    public static final int DISTANCE_BETWEEN_INPUTS_Y = 100;
+    public static final int SIZE_OF_STATS = 40;
+    public static final int SIZE_OF_FIELD = 300;
     public static final int SIZE_OF_MESSAGES = 130;
 
     public static final String WIN_TEXT = "You won!";

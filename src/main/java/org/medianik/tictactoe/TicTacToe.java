@@ -2,19 +2,29 @@ package org.medianik.tictactoe;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.InputStream;
 
-import static org.medianik.tictactoe.Constants.*;
+import static org.medianik.tictactoe.util.Constants.*;
 
 /**
  * JavaFX App
  */
 public class TicTacToe extends Application{
+
+    static {
+        // https://stackoverflow.com/questions/66488204/javafx-when-i-create-new-instance-of-textfield-whole-window-becomes-white-ish
+        Application.setUserAgentStylesheet(Application.STYLESHEET_CASPIAN);
+    }
 
     private static TicTacToe instance;
     public static TicTacToe getInstance(){
@@ -23,7 +33,7 @@ public class TicTacToe extends Application{
 
     private final int width;
     private final int height;
-    final StackPane pane;
+    final Pane pane;
     private final GameManager manager;
 
     public TicTacToe(){
@@ -66,6 +76,12 @@ public class TicTacToe extends Application{
         InputStream inputIcon = getClass().getResourceAsStream("/icon.png");
         Image icon = new Image(inputIcon);
         stage.getIcons().add(icon);
+    }
+
+    @Override
+    public void stop() throws Exception{
+        System.out.println("stop");
+//        manager.stop();
     }
 
     public int getWidth(){

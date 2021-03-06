@@ -7,7 +7,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeLineCap;
 import lombok.AllArgsConstructor;
 
-import static org.medianik.tictactoe.Constants.*;
+import static org.medianik.tictactoe.util.Constants.*;
 
 public class CenteredArc{
 

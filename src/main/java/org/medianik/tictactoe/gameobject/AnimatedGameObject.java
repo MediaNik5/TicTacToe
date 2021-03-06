@@ -3,10 +3,10 @@ package org.medianik.tictactoe.gameobject;
 import javafx.scene.layout.Pane;
 
 import static java.lang.Math.PI;
-import static org.medianik.tictactoe.Constants.TICKS_PER_ANIMATION;
-import static org.medianik.tictactoe.Constants.TIME_PER_TICK_IN_ANIMATION;
+import static org.medianik.tictactoe.util.Constants.TICKS_PER_ANIMATION;
+import static org.medianik.tictactoe.util.Constants.TIME_PER_TICK_IN_ANIMATION;
 
-public abstract class AnimatedGameObject implements GameObject{
+public abstract class AnimatedGameObject extends GameObject{
 
     /**
      * @param time is value from 0 to 1 stating that time*100% of animation is done
@@ -15,23 +15,10 @@ public abstract class AnimatedGameObject implements GameObject{
     protected double animationProgress;
     protected double normalizingCoefficient;
     protected final int startingTick;
-    protected final int x;
-    protected final int y;
-
-    public int getX(){
-        return x;
-    }
-
-    public int getY(){
-        return y;
-    }
-
-    private boolean alive = true;
 
     protected AnimatedGameObject(int startingTick, int x, int y){
+        super(x, y);
         this.startingTick = startingTick;
-        this.x = x;
-        this.y = y;
         calculateNormalizingCoefficient();
     }
 
@@ -64,13 +51,7 @@ public abstract class AnimatedGameObject implements GameObject{
     }
 
     @Override
-    public boolean isAlive(){
-        return alive;
-    }
-
-    @Override
     public void destroy(int tick, Pane pane){
-        GameObject.super.destroy(tick, pane);
-        alive = false;
+        super.destroy(tick, pane);
     }
 }

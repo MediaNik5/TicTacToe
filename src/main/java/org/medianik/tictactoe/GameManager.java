@@ -3,24 +3,18 @@ package org.medianik.tictactoe;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.util.Duration;
-import org.medianik.tictactoe.gameobject.GameObject;
-import org.medianik.tictactoe.gameobject.Grid;
-import org.medianik.tictactoe.gameobject.Mark;
-import org.medianik.tictactoe.gameobject.TextLabel;
+import org.medianik.tictactoe.gameobject.*;
+import org.medianik.tictactoe.player.Player;
 
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.medianik.tictactoe.Constants.TIME_PER_TICK;
-import static org.medianik.tictactoe.Constants.WIN_TEXT;
+import static org.medianik.tictactoe.util.Constants.*;
 
 public class GameManager{
 
@@ -39,20 +33,34 @@ public class GameManager{
     public GameManager(){
         executor = new Timeline(new KeyFrame(Duration.millis(TIME_PER_TICK*1000), GameManager::execute));
         gameObjects = new HashSet<>();
-        players = new Player[]{new Player(Mark.Type.CROSS), new Player(Mark.Type.NOUGHT)};
+        players = new Player[2];
     }
 
     public void start(){
         tick = 0;
 
-        pane = TicTacToe.getInstance().pane;
-        pane.setOnMouseClicked(GameManager::click);
+        initializePlayers();
 
-        grid = new Grid();
-        gameObjects.add(grid);
+        pane = TicTacToe.getInstance().pane;
+//        pane.setOnMouseClicked(GameManager::click);
+
+//        grid = new Grid();
+//        gameObjects.add(grid);
+//        gameObjects.add(new TextInput("Privet", 0, 0));
+
+//        players[0] = new Player("MediaNik", Mark.Type.CROSS);
+//        players[1] = new Player("Twelve", Mark.Type.NOUGHT);
 
         executor.setCycleCount(Animation.INDEFINITE);
         executor.play();
+    }
+
+    private void initializePlayers(){
+        var instance = TicTacToe.getInstance();
+        TextInput player1 = new TextInput("Player 1", -DISTANCE_BETWEEN_INPUTS_X/2, -DISTANCE_BETWEEN_INPUTS_Y/2, SIZE_OF_STATS);
+        TextInput player2 = new TextInput("Player 2", DISTANCE_BETWEEN_INPUTS_X/2, DISTANCE_BETWEEN_INPUTS_Y/2, SIZE_OF_STATS);
+        gameObjects.add(player1);
+        gameObjects.add(player2);
     }
 
 
@@ -103,7 +111,8 @@ public class GameManager{
     }
 
     private static Player getCurrentPlayer(GameManager instance){
-        return instance.getPlayers()[0].isTurn() ? instance.getPlayers()[0] : instance.getPlayers()[1];
+        Player[] players = instance.getPlayers();
+        return players[0].isTurn() ? players[0] : players[1];
     }
 
     private Player[] getPlayers(){
@@ -115,6 +124,21 @@ public class GameManager{
     }
 
     private static void win(){
-        getInstance().gameObjects.add(new TextLabel(WIN_TEXT, getInstance().getTick(), 0, 0));
+        getInstance().gameObjects.add(new TextLabel(WIN_TEXT, 0, 0, SIZE_OF_MESSAGES));
+        Player[] players = instance.getPlayers();
+        if(players[0].isTurn()){
+            players[0].getStats().increaseWins();
+            players[1].getStats().increaseLoses();
+        }else{
+            players[1].getStats().increaseWins();
+            players[0].getStats().increaseLoses();
+        }
+    }
+
+    public void stop() throws IOException{
+        for(Player p : players)
+            p.getStats().saveStats();
+        for(var go : gameObjects)
+            go.destroy(getTick(), pane);
     }
 }

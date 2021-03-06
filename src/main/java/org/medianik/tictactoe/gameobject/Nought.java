@@ -6,8 +6,7 @@ import javafx.scene.shape.Arc;
 import javafx.scene.shape.ArcType;
 import org.medianik.tictactoe.jfxhelper.CenteredArc;
 
-import static java.lang.Math.PI;
-import static org.medianik.tictactoe.Constants.TIME_PER_TICK_IN_ANIMATION;
+import static org.medianik.tictactoe.util.Constants.TIME_PER_TICK_IN_ANIMATION;
 
 public class Nought extends Mark{
 

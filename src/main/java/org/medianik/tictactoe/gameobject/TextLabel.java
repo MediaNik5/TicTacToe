@@ -6,34 +6,23 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-import java.util.Arrays;
+import static org.medianik.tictactoe.util.Constants.*;
 
-import static org.medianik.tictactoe.Constants.*;
+public class TextLabel extends GameObject{
 
-public class TextLabel extends AnimatedGameObject{
+    private Text text;
 
-    private final Text text;
-
-    public TextLabel(String textToPrint, int startingTick, int x, int y){
-        super(startingTick, x, y);
+    public TextLabel(String textToPrint, int x, int y, int size){
+        super(x, y);
         text = new Text();
+        text.setTranslateX(x);
+        text.setTranslateY(y);
         text.setFill(COLOR_OF_MESSAGES);
         text.setStroke(STROKE_OF_MESSAGES);
         text.setStrokeWidth(WIDTH_OF_STROKE/2);
-        text.setFont(Font.font(FONT_OF_MESSAGES, FontWeight.NORMAL, SIZE_OF_MESSAGES));
+        text.setFont(Font.font(FONT_OF_MESSAGES, FontWeight.NORMAL, size));
         text.setText(textToPrint);
-        text.setFill(new Color(1, 1, 1, 0));
-    }
-
-    @Override
-    public void animate(int tick){
-        if(animationProgress <= 1.){
-            animationProgress += animationSpeed((tick - startingTick)*TIME_PER_TICK_IN_ANIMATION);
-            if(animationProgress <= 1.)
-                text.setFill(new Color(1, 1, 1, animationProgress));
-
-//            text.setText(textToPrint.substring(0, (int) (textToPrint.length()*animationProgress)));
-        }
+        text.setFill(new Color(1, 1, 1, 1));
     }
 
     @Override
@@ -41,4 +30,12 @@ public class TextLabel extends AnimatedGameObject{
         if(!pane.getChildren().contains(text))
             pane.getChildren().add(text);
     }
+
+    @Override
+    public void destroy(int tick, Pane pane){
+        super.destroy(tick, pane);
+        pane.getChildren().remove(text);
+        text = null;
+    }
+
 }

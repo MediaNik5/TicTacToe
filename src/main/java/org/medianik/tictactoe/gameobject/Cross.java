@@ -3,8 +3,7 @@ package org.medianik.tictactoe.gameobject;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 
-import static java.lang.Math.PI;
-import static org.medianik.tictactoe.Constants.*;
+import static org.medianik.tictactoe.util.Constants.*;
 
 public class Cross extends Mark{
 
@@ -54,5 +53,7 @@ public class Cross extends Mark{
     public void destroy(int tick, Pane pane){
         super.destroy(tick, pane);
         pane.getChildren().removeAll(leftStick, rightStick);
+        leftStick = null;
+        rightStick = null;
     }
 }
