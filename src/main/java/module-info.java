@@ -1,6 +1,7 @@
 module org.medianik.tictactoe {
-    requires javafx.controls;
+    requires org.jetbrains.annotations;
     requires static lombok;
+    requires javafx.controls;
     exports org.medianik.tictactoe;
     exports org.medianik.tictactoe.player;
     exports org.medianik.tictactoe.util;

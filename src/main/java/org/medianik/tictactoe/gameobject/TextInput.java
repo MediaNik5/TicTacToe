@@ -1,12 +1,15 @@
 package org.medianik.tictactoe.gameobject;
 
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import org.medianik.tictactoe.GameManager;
+import org.medianik.tictactoe.TicTacToe;
+import org.medianik.tictactoe.player.Player;
 
-import static org.medianik.tictactoe.util.Constants.FONT_OF_MESSAGES;
-import static org.medianik.tictactoe.util.Constants.SIZE_OF_FIELD;
+import static org.medianik.tictactoe.util.Constants.*;
 
 public class TextInput extends GameObject{
 
@@ -20,6 +23,25 @@ public class TextInput extends GameObject{
         textField.setMaxWidth(SIZE_OF_FIELD);
         textField.setFont(Font.font(FONT_OF_MESSAGES, FontWeight.NORMAL, size));
         textField.setPromptText(textToAsk);
+
+    }
+
+    @Override
+    public boolean isKeyToHandle(KeyCode key){
+        return key == KeyCode.ENTER || key == KeyCode.TAB;
+    }
+
+    @Override
+    public void handleKey(KeyCode key){
+        if(key == KeyCode.TAB){
+            if(textField.isFocused())
+                return;
+            if(textField.getText().isBlank())
+                return;
+        }else if(!textField.isFocused())
+            return;
+        GameManager.getInstance().addPlayer(textField.getText());
+        destroyReady = true;
     }
 
     @Override

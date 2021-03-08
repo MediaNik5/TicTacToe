@@ -4,6 +4,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import org.medianik.tictactoe.player.Player;
 import org.medianik.tictactoe.TicTacToe;
+import org.medianik.tictactoe.util.Util;
 
 import static org.medianik.tictactoe.util.Constants.*;
 
@@ -146,5 +147,13 @@ public class Grid extends GameObject{
         if(m == null)
             return null;
         return m.getType();
+    }
+
+    public boolean isFull(){
+        for(Mark[] marks : marks)
+            for(Mark mark : marks)
+                if(!Util.isPresent(mark))
+                    return false;
+        return true;
     }
 }

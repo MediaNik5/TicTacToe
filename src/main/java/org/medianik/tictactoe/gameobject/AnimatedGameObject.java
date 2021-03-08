@@ -43,7 +43,7 @@ public abstract class AnimatedGameObject extends GameObject{
     public abstract void animate(int tick);
 
     @Override
-    public void tick(Pane pane, int tick){
+    public void tick(int tick, Pane pane){
         if(isAlive()){
             animate(tick);
             display(pane);

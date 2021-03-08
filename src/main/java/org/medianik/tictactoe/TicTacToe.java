@@ -2,15 +2,11 @@ package org.medianik.tictactoe;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.InputStream;
 
@@ -44,6 +40,15 @@ public class TicTacToe extends Application{
         instance = this;
     }
 
+    private int calculateWidth(){
+        var bounds = Screen.getPrimary().getBounds();
+        return Math.min((int) bounds.getWidth() - GLOBAL_OFFSET, MAX_WIDTH);
+    }
+
+    private int calculateHeight(){
+        var bounds = Screen.getPrimary().getBounds();
+        return Math.min((int) bounds.getHeight() - 2*GLOBAL_OFFSET, MAX_HEIGHT);
+    }
 
     public static void main(String[] args){
         launch();
@@ -62,16 +67,6 @@ public class TicTacToe extends Application{
         manager.start();
     }
 
-    private int calculateWidth(){
-        var bounds = Screen.getPrimary().getBounds();
-        return Math.min((int) bounds.getWidth() - GLOBAL_OFFSET, MAX_WIDTH);
-    }
-
-    private int calculateHeight(){
-        var bounds = Screen.getPrimary().getBounds();
-        return Math.min((int) bounds.getHeight() - GLOBAL_OFFSET, MAX_HEIGHT);
-    }
-
     private void setupIcon(Stage stage){
         InputStream inputIcon = getClass().getResourceAsStream("/icon.png");
         Image icon = new Image(inputIcon);
@@ -80,8 +75,8 @@ public class TicTacToe extends Application{
 
     @Override
     public void stop() throws Exception{
-        System.out.println("stop");
-//        manager.stop();
+        System.out.println("close");
+        manager.onClose();
     }
 
     public int getWidth(){

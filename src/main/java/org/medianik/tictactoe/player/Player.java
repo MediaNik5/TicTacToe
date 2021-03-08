@@ -8,17 +8,25 @@ import org.medianik.tictactoe.player.Statistic;
 public class Player{
 
     private final Creator markCreator;
-
     private boolean turn;
-
     private final Statistic stats;
+    private final Mark.Type side;
 
     public Player(String name, Mark.Type side){
-        this.turn = side == Mark.Type.CROSS;
+        this.side = side;
         if(side == Mark.Type.CROSS)
             markCreator = Cross::new;
         else markCreator = Nought::new;
-        stats = Statistic.loadStats(name);
+        stats = Statistic.loadStats(name, side);
+        newGame();
+    }
+
+    public void newGame(){
+        this.turn = getSide() == Mark.Type.CROSS;
+    }
+
+    public Mark.Type getSide(){
+        return side;
     }
 
     public Creator getMarkCreator(){
@@ -35,6 +43,17 @@ public class Player{
 
     public void changeTurn(){
         turn = !turn;
+    }
+
+    /**
+     * @return true if wins got increased false otherwise.
+     */
+    public boolean updateStats(){
+        if(isTurn())
+            getStats().increaseWins();
+        else
+            getStats().increaseLoses();
+        return isTurn();
     }
 
     public interface Creator<T extends Mark>{
