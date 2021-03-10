@@ -32,11 +32,7 @@
 
   <h3 align="center">TicTacToe</h3>
 
-  <p align="center">
-    project_description
-    <br />
-    <a href="https://github.com/MediaNik5/TicTacToe"><strong>Explore the docs »</strong></a>
-    <br />
+  <p align="center
     <br />
     <a href="https://github.com/MediaNik5/TicTacToe">View Demo</a>
     ·
